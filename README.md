@@ -9,7 +9,9 @@
 | encrypted_password | string | null: false               |
 | firstname          | string | null: false               |
 | lastname           | string | null: false               |
-| birth              | string | null: false               |
+| firstname_kana     | string | null: false               |
+| lastname_kana      | string | null: false               |
+| birth              | date   | null: false               |
 
 ## items テーブル
 
@@ -19,3 +21,26 @@
 | category  | string | null: false                    |
 | price     | string | null: false                    |
 | user      | string | null: false, foreign_key: true |
+
+## purchases テーブル
+
+| Column | Type      | Options     |
+| ------ | --------- | ----------- |
+| item   | reference | null: false |
+| user   | reference | null: false |
+| date   | date      | null: false |
+
+## purchases テーブル
+
+| Column | Type      | Options     |
+| ------ | --------- | ----------- |
+| item   | reference | null: false |
+| user   | reference | null: false |
+| date   | date      | null: false |
+
+## address テーブル
+
+| Column  | Type      | Options     |
+| ------- | --------- | ----------- |
+| address | text      | null: false |
+| user    | reference | null: false |
