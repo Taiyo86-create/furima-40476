@@ -22,8 +22,8 @@
 
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
-| itemsname          | string     | null: false                    |
-| itemsfeature       | text       | null: false                    |
+| itemsName          | string     | null: false                    |
+| itemsFeature       | text       | null: false                    |
 | category_id        | integer    | null: false                    |
 | price              | integer    | null: false                    |
 | status_id          | integer    | null: false                    |
@@ -39,9 +39,10 @@
 
 ## purchases テーブル
 
-| Column   | Type       | Options                        |
-| -------- | ---------- | ------------------------------ |
-| purchase | references | null: false, foreign_key: true |
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| user   | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -51,16 +52,15 @@
 
 ## address テーブル
 
-| Column          | Type       | Options     |
-| --------------- | ---------- | ----------- |
-| item            | references | null: false |
-| user            | references | null: false |
-| post_code       | string     | null: false |
-| prefecture_id   | integer    | null: false |
-| client_city     | string     | null: false |
-| client_local    | string     | null: false |
-| client_building | string     |             |
-| phone_number    | string     | null: false |
+| Column          | Type       | Options                        |
+| --------------- | ---------- | ------------------------------ |
+| purchase        | references | null: false, foreign_key: true |
+| post_code       | string     | null: false                    |
+| prefecture_id   | integer    | null: false                    |
+| client_city     | string     | null: false                    |
+| client_local    | string     | null: false                    |
+| client_building | string     |                                |
+| phone_number    | string     | null: false                    |
 
 ### Association
 
