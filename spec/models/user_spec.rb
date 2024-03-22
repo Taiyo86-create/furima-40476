@@ -23,8 +23,8 @@ RSpec.describe User, type: :model do
       end
 
       it "passwordが6文字以上であれば登録できる" do
-        @user.password = "password"
-        @user.password_confirmation = "password"
+        @user.password = "password1"
+        @user.password_confirmation = "password1"
         expect(@user).to be_valid
       end
 
@@ -52,8 +52,5 @@ RSpec.describe User, type: :model do
       end
     end
 
-    context '新規登録できない場合' do
-      # 既存のテストはそのまま利用
-    end
   end
 end
