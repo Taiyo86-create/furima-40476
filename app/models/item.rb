@@ -13,8 +13,8 @@ class Item < ApplicationRecord
   belongs_to :schedule
 
 
-  validates :itemsName, :text, presence: true
-  validates :itemsFeature, :text, presence: true
+  validates :itemsName, presence: true
+  validates :itemsFeature, presence: true
 
   validates :category_id, numericality: { other_than: 1 }
   validates :status_id, numericality: { other_than: 1 }
