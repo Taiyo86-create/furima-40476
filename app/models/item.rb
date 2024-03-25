@@ -27,7 +27,7 @@ class Item < ApplicationRecord
     end
   end
 
-  validates :images, presence: true
+  validates :image, presence: true
 
 
   validates :category_id, numericality: { other_than: 1 }
