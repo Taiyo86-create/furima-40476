@@ -9,15 +9,24 @@ RSpec.describe Item, type: :model do
 
   # 正常系テスト
   context "商品保存できる" do
-    it "商品名が空だと出品できない" do
-      @item.itemsName = ""
-      @item.valid?
-      expect(@item.errors[:itemsName]).to include("can't be blank")
+    it "正常なデータで保存できる" do
+      @item.images.attach(io: File.open(Rails.root.join('public', 'images', 'test_image.png')), filename: 'test_image.png', content_type: 'image/png')
+      @item.category_id = 2
+      @item.status_id = 2
+      @item.delivery_charge_id = 2
+      expect(@item).to be_valid
     end
   end
 
   # 異常系テスト
   context "商品保存できない" do
+
+    it "商品名が空だと出品できない" do
+      @item.itemsName = ""
+      @item.valid?
+      expect(@item.errors[:itemsName]).to include("can't be blank")
+    end
+
     it "商品の特徴が空だと出品できない" do
       @item.itemsFeature = ""
       @item.valid?
