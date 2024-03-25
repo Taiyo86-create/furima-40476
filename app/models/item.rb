@@ -11,14 +11,23 @@ class Item < ApplicationRecord
   belongs_to :delivery_charge
   belongs_to :prefecture
   belongs_to :schedule
+  has_many_attached :images
 
 
   validates :itemsName, presence: true
   validates :itemsFeature, presence: true
   validates :price, presence: true,
-  numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 },
-  format: { with: /\A\d+\z/, message: "must be a valid integer" }
+  numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
 
+  validate :price_must_be_integer
+
+  def price_must_be_integer
+    if price.present? && !price.to_s.match(/\A[0-9]+\z/)
+      errors.add(:price, "must be a valid integer")
+    end
+  end
+
+  validates :images, presence: true
 
 
   validates :category_id, numericality: { other_than: 1 }
