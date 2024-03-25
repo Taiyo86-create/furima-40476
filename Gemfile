@@ -80,3 +80,7 @@ gem 'devise'
 gem 'gimei'
 
 gem 'active_hash'
+
+gem 'faker'
+
+gem 'open-uri'
