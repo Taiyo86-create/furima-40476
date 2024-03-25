@@ -3,12 +3,12 @@ FactoryBot.define do
     itemsName { Faker::Commerce.product_name }
     itemsFeature { Faker::Lorem.sentence }
     price { Faker::Commerce.price(range: 1000..100000).to_i }
-    status_id { Status.all.sample }
-    delivery_charge_id { DeliveryCharge.all.sample }
-    prefecture_id { Prefecture.all.sample }
-    schedule_id { Schedule.all.sample }
+    status_id {  rand(1..Status.count) }
+    delivery_charge_id {  rand(1..DeliveryCharge.count) }
+    prefecture_id { rand(1..Prefecture.count) }
+    schedule_id { rand(1..Schedule.count) }
     user { association :user }
-    category_id { Category.all.sample}
+    category_id { rand(1..Category.count) }
 
     after(:build) do |item|
       item.image.attach(io: File.open('public/images/test_image.png'), filename: 'test_image.png')
