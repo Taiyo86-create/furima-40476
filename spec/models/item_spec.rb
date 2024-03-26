@@ -100,10 +100,10 @@ RSpec.describe Item, type: :model do
     end
 
     it "画像がないと出品できない" do
-      @item.images.attach(io: File.open(Rails.root.join('public', 'images', 'test_image.png')), filename: 'test_image.png', content_type: 'image/png')
-      @item.images.purge
+      @item.image.attach(io: File.open(Rails.root.join('public', 'images', 'test_image.png')), filename: 'test_image.png', content_type: 'image/png')
+      @item.image.purge
       @item.valid?
-      expect(@item.errors[:images]).to include("can't be blank")
+      expect(@item.errors[:image]).to include("can't be blank")
     end
   end
 end
