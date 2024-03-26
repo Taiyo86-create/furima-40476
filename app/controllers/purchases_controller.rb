@@ -7,4 +7,18 @@ class PurchasesController < ApplicationController
     end
   end
 
+  def create
+    @address = Address.new(address_params)
+    if @address.save
+      redirect_to root_path
+    else
+      render :index, status: :unprocessable_entity
+    end
+  end
+
+  private
+  def address_params
+    params.require(:address).permit(:post_code, :prefecture_id, :client_city, :client_local, :client_building, :phone_number)
+  end
+
 end
