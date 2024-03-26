@@ -7,9 +7,15 @@ class PurchasesController < ApplicationController
     end
   end
 
+  def new
+    @purchase = Purchase.new
+    @address = Address.new
+  end
+
   def create
-    @address = Address.new(address_params)
-    if @address.save
+    @payment_form = PayjpPaymentForm.new(payment_form_params)
+
+    if @payment_form.save
       redirect_to root_path
     else
       render :index, status: :unprocessable_entity
@@ -17,8 +23,11 @@ class PurchasesController < ApplicationController
   end
 
   private
-  def address_params
-    params.require(:address).permit(:post_code, :prefecture_id, :client_city, :client_local, :client_building, :phone_number)
-  end
 
+  def payment_form_params
+    params.require(:payjp_payment_form).permit(
+      :card_number, :exp_month, :exp_year, :cvc,
+      :post_code, :prefecture_id, :client_city, :client_local, :client_building, :phone_number
+    )
+  end
 end
