@@ -21,8 +21,6 @@ class ItemsController < ApplicationController
     unless user_signed_in? && current_user == @item.user
       redirect_to user_signed_in? ? root_path : new_user_session_path
     end
-
-
   end
 
   def create
