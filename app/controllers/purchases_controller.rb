@@ -16,6 +16,12 @@ class PurchasesController < ApplicationController
     @payment_form = PayjpPaymentForm.new(payment_form_params)
 
     if @payment_form.save
+      Payjp.api_key = "sk_test_823f95eefb5f5970be90a4db"
+      Payjp::Charge.create(
+        amount: order_params[:price],
+        card: order_params[:token],
+        currency: 'jpy'
+      )
       redirect_to root_path
     else
       render :index, status: :unprocessable_entity

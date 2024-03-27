@@ -84,3 +84,5 @@ gem 'active_hash'
 gem 'faker'
 
 gem 'open-uri'
+
+gem 'payjp'
