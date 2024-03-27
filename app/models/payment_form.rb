@@ -1,6 +1,7 @@
 class PaymentForm
   include ActiveModel::Model
 
+
   attr_accessor :user_id, :item_id, :post_code, :prefecture_id, :client_city, :client_local, :client_building, :phone_number
   attr_accessor :token, :price
 
