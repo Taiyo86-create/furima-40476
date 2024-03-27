@@ -2,27 +2,24 @@ class PurchasesController < ApplicationController
 
   def index
     @item = Item.find(params[:item_id])
+    @payment_form = PaymentForm.new
     unless user_signed_in? && current_user != @item.user
       redirect_to user_signed_in? ? root_path : new_user_session_path
     end
   end
 
-  def new
-    @purchase = Purchase.new
-    @address = Address.new
-  end
-
   def create
-    @payment_form = PayjpPaymentForm.new(payment_form_params)
-
-    if @payment_form.save
+    @payment_form = PaymentForm.new(payment_form_params)
+    @item = Item.find(params[:item_id])
+    if @payment_form.valid?
       Payjp.api_key = "sk_test_823f95eefb5f5970be90a4db"
       Payjp::Charge.create(
-        amount: order_params[:price],
-        card: order_params[:token],
+        amount: @item.price,
+        card: payment_form_params[:token],
         currency: 'jpy'
       )
-      redirect_to root_path
+      @payment_form.save
+      return redirect_to root_path
     else
       render :index, status: :unprocessable_entity
     end
@@ -31,9 +28,7 @@ class PurchasesController < ApplicationController
   private
 
   def payment_form_params
-    params.require(:payjp_payment_form).permit(
-      :card_number, :exp_month, :exp_year, :cvc,
-      :post_code, :prefecture_id, :client_city, :client_local, :client_building, :phone_number
-    )
+    params.require(:payment_form).permit(:post_code, :prefecture_id, :client_city, :client_local, :client_building, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
+
 end

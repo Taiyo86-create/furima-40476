@@ -86,3 +86,6 @@ gem 'faker'
 gem 'open-uri'
 
 gem 'payjp'
+
+
+gem 'pry'
