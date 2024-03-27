@@ -27,9 +27,10 @@
       </p>
     </div>
 
-
     <%= form_with model: @payment_form, url: item_purchases_path, id: 'charge-form', class: 'transaction-form-wrap',local: true do |f| %>
-    <%# カード情報の入力 %>
+
+    <%= render 'shared/error_messages', model: f.object %>
+
     <div class='credit-card-form'>
       <h1 class='info-input-haedline'>
         クレジットカード情報入力
@@ -64,9 +65,7 @@
         <div id="cvc-form" class="input-default"></div>
       </div>
     </div>
-    <%# /カード情報の入力 %>
     
-    <%# 配送先の入力 %>
     <div class='shipping-address-form'>
       <h1 class='info-input-haedline'>
         配送先入力

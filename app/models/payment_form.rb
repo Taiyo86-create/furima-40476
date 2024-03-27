@@ -5,7 +5,7 @@ class PaymentForm
   attr_accessor :token, :price
 
   validates :post_code, presence: true, format: { with: /\A\d{3}-\d{4}\z/, message: "はハイフンを含む3桁ハイフン4桁の形式で入力してください" }
-  validates :prefecture_id, presence: true
+  validates :prefecture_id, numericality: { other_than: 1 }
   validates :client_city, presence: true
   validates :client_local, presence: true
   validates :phone_number, presence: true, format: { with: /\A\d{10,11}\z/, message: "は10桁以上11桁以内の半角数値で入力してください" }
