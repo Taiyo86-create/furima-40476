@@ -3,6 +3,7 @@ class PurchasesController < ApplicationController
   def index
     @item = Item.find(params[:item_id])
     @payment_form = PaymentForm.new
+    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     unless user_signed_in? && current_user != @item.user && !@item.purchase.present?
       redirect_to user_signed_in? ? root_path : new_user_session_path
     end
@@ -12,7 +13,7 @@ class PurchasesController < ApplicationController
     @payment_form = PaymentForm.new(payment_form_params)
     @item = Item.find(params[:item_id])
     if @payment_form.valid?
-      Payjp.api_key = "sk_test_823f95eefb5f5970be90a4db"
+      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
       Payjp::Charge.create(
         amount: @item.price,
         card: payment_form_params[:token],

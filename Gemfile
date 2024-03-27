@@ -89,3 +89,5 @@ gem 'payjp'
 
 
 gem 'pry'
+
+gem 'gon'
