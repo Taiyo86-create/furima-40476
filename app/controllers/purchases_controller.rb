@@ -3,7 +3,7 @@ class PurchasesController < ApplicationController
   def index
     @item = Item.find(params[:item_id])
     @payment_form = PaymentForm.new
-    unless user_signed_in? && current_user != @item.user
+    unless user_signed_in? && current_user != @item.user && !@item.purchase.present?
       redirect_to user_signed_in? ? root_path : new_user_session_path
     end
   end
