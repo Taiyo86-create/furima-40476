@@ -27,6 +27,12 @@ RSpec.describe PaymentForm, type: :model do
   end
 
   context "異常系" do
+    it "prefecture_idが1以下の場合は出品できない" do
+      @payment_form.prefecture_id = 1
+      @payment_form.valid?
+      expect(@payment_form.errors[:prefecture_id]).to include("must be other than 1")
+    end
+
     it "post_codeが空だと購入できない" do
       @payment_form.post_code = nil
       expect(@payment_form).not_to be_valid
