@@ -56,6 +56,11 @@ RSpec.describe PaymentForm, type: :model do
       @payment_form.phone_number = "123456789"
       expect(@payment_form).not_to be_valid
     end
+
+    it 'トークンが空だと購入できない' do
+      @payment_form.token =''
+      expect(@payment_form).not_to be_valid
+    end
   end
 
 end
