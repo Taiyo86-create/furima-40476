@@ -1,7 +1,6 @@
 class PurchasesController < ApplicationController
-
+  before_action :setting_item, only: [:index, :create]
   def index
-    @item = Item.find(params[:item_id])
     @payment_form = PaymentForm.new
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     unless user_signed_in? && current_user != @item.user && !@item.purchase.present?
@@ -11,7 +10,6 @@ class PurchasesController < ApplicationController
 
   def create
     @payment_form = PaymentForm.new(payment_form_params)
-    @item = Item.find(params[:item_id])
     if @payment_form.valid?
       Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
       Payjp::Charge.create(
@@ -32,4 +30,7 @@ class PurchasesController < ApplicationController
     params.require(:payment_form).permit(:post_code, :prefecture_id, :client_city, :client_local, :client_building, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
 
+  def setting_item
+    @item = Item.find(params[:item_id])
+  end
 end
