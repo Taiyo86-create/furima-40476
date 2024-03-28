@@ -16,6 +16,14 @@ RSpec.describe PaymentForm, type: :model do
 
       expect(@payment_form).to be_valid
     end
+
+    it "建物名が空の場合でも購入できる" do
+      @payment_form.client_building = ""
+      @payment_form.post_code = "123-4567"
+      @payment_form.phone_number = "09012345678"
+      expect(@payment_form).to be_valid
+    end
+
   end
 
   context "異常系" do
