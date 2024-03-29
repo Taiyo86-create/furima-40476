@@ -22,15 +22,15 @@ RSpec.describe Item, type: :model do
   context "商品保存できない" do
 
     it "商品名が空だと出品できない" do
-      @item.itemsName = ""
+      @item.item_name = ""
       @item.valid?
-      expect(@item.errors[:itemsName]).to include("can't be blank")
+      expect(@item.errors[:item_name]).to include("can't be blank")
     end
 
     it "商品の特徴が空だと出品できない" do
-      @item.itemsFeature = ""
+      @item.item_feature = ""
       @item.valid?
-      expect(@item.errors[:itemsFeature]).to include("can't be blank")
+      expect(@item.errors[:item_feature]).to include("can't be blank")
     end
 
     it "価格が空だと出品できない" do

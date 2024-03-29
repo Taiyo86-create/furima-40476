@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :item do
-    itemsName { Faker::Commerce.product_name }
-    itemsFeature { Faker::Lorem.sentence }
+    item_name { Faker::Commerce.product_name }
+    item_feature { Faker::Lorem.sentence }
     price { Faker::Commerce.price(range: 1000..100000).to_i }
     status_id {  rand(2..Status.count) }
     delivery_charge_id {  rand(2..DeliveryCharge.count) }
