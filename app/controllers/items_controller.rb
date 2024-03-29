@@ -15,7 +15,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    unless user_signed_in? && current_user == @item.user && @item.purchase.present?
+    unless user_signed_in? && current_user == @item.user && !@item.purchase.present?
       redirect_to user_signed_in? ? root_path : new_user_session_path
     end
   end

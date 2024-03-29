@@ -30,3 +30,4 @@ form.addEventListener("submit", (e) => {
 };
 
 window.addEventListener("turbo:load", pay);
+window.addEventListener("turbo:render", pay);
