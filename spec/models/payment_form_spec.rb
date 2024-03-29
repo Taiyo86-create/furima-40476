@@ -58,13 +58,39 @@ RSpec.describe PaymentForm, type: :model do
       expect(@payment_form).not_to be_valid
     end
 
-    it "phone_numberは10桁以上11桁以内の半角数値でないと保存できない" do
+    it "phone_numberは9桁では保存できない" do
       @payment_form.phone_number = "123456789"
+      expect(@payment_form).not_to be_valid
+    end
+
+    it "phone_numberは11桁では保存できない" do
+      @payment_form.phone_number = "12345678901"
+      expect(@payment_form).not_to be_valid
+    end
+
+    it "phone_numberは12桁では保存できない" do
+      @payment_form.phone_number = "123456789012"
+      expect(@payment_form).not_to be_valid
+    end
+
+
+    it "phone_numberは10桁以上11桁以内の半角数値でないと保存できない" do
+      @payment_form.phone_number = "1234567890a"
       expect(@payment_form).not_to be_valid
     end
 
     it 'トークンが空だと購入できない' do
       @payment_form.token =''
+      expect(@payment_form).not_to be_valid
+    end
+
+    it "user_idが空の場合は購入できない" do
+      @payment_form.user_id = nil
+      expect(@payment_form).not_to be_valid
+    end
+
+    it "item_idが空の場合は購入できない" do
+      @payment_form.item_id = nil
       expect(@payment_form).not_to be_valid
     end
   end
