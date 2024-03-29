@@ -3,16 +3,17 @@ function updatePrice() {
     let addTaxPrice = document.getElementById('add-tax-price');
     let profit = document.getElementById('profit');
     
-    if (addTaxPrice !== null && profit !== null) {
+    if (addTaxPrice && profit) {
         const calcTax = Math.floor(itemPrice * 0.1);
         const calcProfit = Math.floor(calcTax + itemPrice);
         
         addTaxPrice.innerText = calcTax;
         profit.innerText = calcProfit;
     }
-}
+  }
+  
+  updatePrice();
+  
+  document.getElementById('item-price').addEventListener('input', updatePrice);
 
-// 新規登録ページが読み込まれた際に直接 updatePrice() 関数を呼び出す
-updatePrice();
 
-document.getElementById('item-price').addEventListener('input', updatePrice);

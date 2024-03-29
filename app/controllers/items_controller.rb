@@ -2,8 +2,6 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   def index
     @items = Item.includes(:user).order("created_at DESC")
-
-
   end
 
   def new
@@ -17,7 +15,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    unless user_signed_in? && current_user == @item.user
+    unless user_signed_in? && current_user == @item.user && !@item.purchase.present?
       redirect_to user_signed_in? ? root_path : new_user_session_path
     end
   end
@@ -32,7 +30,7 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save
-      redirect_to item_path
+      redirect_to items_path
     else
       render :new, status: :unprocessable_entity
     end
@@ -55,5 +53,4 @@ class ItemsController < ApplicationController
   def set_item
     @item = Item.find(params[:id])
   end
-
 end
