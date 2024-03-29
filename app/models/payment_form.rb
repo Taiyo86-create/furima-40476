@@ -5,12 +5,12 @@ class PaymentForm
   attr_accessor :user_id, :item_id, :post_code, :prefecture_id, :client_city, :client_local, :client_building, :phone_number, :token
 
   with_options presence: true do
-    validates :client_building, length: { maximum: 100 }
     validates :post_code, format: { with: /\A\d{3}-\d{4}\z/, message: "はハイフンを含む3桁ハイフン4桁の形式で入力してください" }
     validates :prefecture_id, numericality: { other_than: 1 }
     validates :client_city, :client_local, :user_id, :item_id, :token
     validates :phone_number, format: { with: /\A\d{10,11}\z/, message: "は10桁以上11桁以内の半角数値で入力してください" }
   end
+  validates :client_building, length: { maximum: 100 }
 
 
   def save
