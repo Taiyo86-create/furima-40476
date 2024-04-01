@@ -5,7 +5,7 @@ function updatePrice() {
     
     if (addTaxPrice && profit) {
         const calcTax = Math.floor(itemPrice * 0.1);
-        const calcProfit = Math.floor(calcTax + itemPrice);
+        const calcProfit = Math.floor(itemPrice - calcTax);
         
         addTaxPrice.innerText = calcTax;
         profit.innerText = calcProfit;
@@ -13,7 +13,6 @@ function updatePrice() {
   }
   
   updatePrice();
-  
+ 
   document.getElementById('item-price').addEventListener('input', updatePrice);
-
 
