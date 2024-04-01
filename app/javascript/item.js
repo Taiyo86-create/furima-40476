@@ -11,8 +11,10 @@ function updatePrice() {
         profit.innerText = calcProfit;
     }
   }
-  
-  updatePrice();
+  window.addEventListener("turbo:load", updatePrice);
+  window.addEventListener("turbo:render", updatePrice);
+
+
  
   document.getElementById('item-price').addEventListener('input', updatePrice);
 
