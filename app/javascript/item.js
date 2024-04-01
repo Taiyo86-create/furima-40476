@@ -10,11 +10,10 @@ function updatePrice() {
         addTaxPrice.innerText = calcTax;
         profit.innerText = calcProfit;
     }
+    document.getElementById('item-price').addEventListener('input', updatePrice);
   }
   window.addEventListener("turbo:load", updatePrice);
   window.addEventListener("turbo:render", updatePrice);
 
-
- 
-  document.getElementById('item-price').addEventListener('input', updatePrice);
+  
 
